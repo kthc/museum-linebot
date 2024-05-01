@@ -294,15 +294,13 @@ class S1(Story):
                     title='兒童的創意空間',
                     text='小城小南，哪裡有適合兒童的創意空間哩~請選擇',
                     actions=[
-                        PostbackTemplateAction(
+                        MessageTemplateAction(
                             label='找到了，準備開始!!',
-                            text='找到了，準備開始!!',
-                            data='S1&ready'
+                            text='找到了，準備開始!!'
                         ),
-                        PostbackTemplateAction(
+                        MessageTemplateAction(
                             label='我迷路了，請給提示',
-                            text='我迷路了，請給提示',
-                            data='S1&lost'
+                            text='我迷路了，請給提示'
                         )
                     ]
                 )
@@ -368,11 +366,12 @@ class S3(Story):
 
     def get_main_message(self):
         return [
+            TextSendMessage(text="哇，這有馬槽聖嬰的小造景耶，讓我想起了小時候在附近教會安親班的點滴，小南你猜這個節日是對應上面球裡的什麼哩？"),
             TemplateSendMessage(
                 alt_text='Buttons template',
                 template=ButtonsTemplate(
                     title='馬槽聖嬰的小造景',
-                    text='哇，這有馬槽聖嬰的小造景耶，讓我想起了小時候在附近教會安親班的點滴，小南你猜這個節日是對應上面球裡的什麼哩？',
+                    text='選選看',
                     actions=[
                         MessageTemplateAction(
                             label='花環',
@@ -407,6 +406,596 @@ class S3(Story):
         return True, []
 
 
+class S4(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 4
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = ["誒，旁邊的這個是什麼啊？（看向旁邊）原來是計時工具啊，小城你從小學琴，哪種是你最熟悉的計時工具？"]
+        self.ans = '節拍器'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+
+class S5(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 5
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = []
+        self.ans = '2'
+        self.reply_messages_correct = ["Wow!! 這個親子空間寓教於樂又設計用心超棒的，下次我們再來玩。(步行上樓，經過了記憶中熟悉的老牌咖啡廳，改裝後的它更顯恬靜怡然的氛圍)"]
+        self.reply_messages_wrong = [
+            '''好像不太對!''']
+
+    def get_main_message(self):
+        return [
+            TextSendMessage(text="小城小南，快看那邊的兒童彩繪圖好可愛呀，小南快來數數裡面有幾隻妳最愛的貓？"),
+            TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ButtonsTemplate(
+                    title='兒童彩繪圖',
+                    text='數數看',
+                    actions=[
+                        MessageTemplateAction(
+                            label='2',
+                            text='2'
+                        ),
+                        MessageTemplateAction(
+                            label='3',
+                            text='3'
+                        ),
+                        MessageTemplateAction(
+                            label='4',
+                            text='4'
+                        )
+                    ]
+                )
+            )
+        ]
+
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        if force_correct:
+            # force correct answer
+            return True, []
+        ans = f"{ans}"
+        if type(ans) is str:
+            if ans == "":
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+            elif ans == self.ans:
+                return True, [TextSendMessage(text=msg) for msg in self.reply_messages_correct]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S6(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 6
+        self.story_name = 'na'
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = []
+        self.ans = ''
+        self.reply_messages_correct = []
+        self.reply_messages_wrong = [
+            '''請往史博館5F雕築史跡展''']
+
+    def get_main_message(self):
+        return [
+            TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ButtonsTemplate(
+                    title='改建過程的展覽',
+                    text='老爸我是學建築的，我們來找找有沒有介紹改建過程的展覽。',
+                    actions=[
+                        MessageTemplateAction(
+                            label='找到了，準備開始!!',
+                            text='找到了，準備開始!!'
+                        ),
+                        MessageTemplateAction(
+                            label='我迷路了，請給提示',
+                            text='我迷路了，請給提示'
+                        )
+                    ]
+                )
+            )
+        ]
+
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        print(f"ans: {ans}")
+        if force_correct:
+            # force correct answer
+            return True, []
+        if ans == '找到了，準備開始!!':
+            return True, []
+        elif ans == '我迷路了，請給提示':
+            return True, [TextSendMessage(text=msg) for msg in self.reply_messages_wrong]
+        return False, []
+
+class S7(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 7
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = ["小城你猜，史博館在1916年時曾作為台灣勸業共進會的什麼場地使用？"]
+        self.ans = '迎賓館'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S8(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 8
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = ["原來史博館在1960年代早期的大廳上方有好細緻的龍鳳天花板，小南你看得出內圈是哪四個字嗎？"]
+        self.ans = '吉祥如意'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+
+    def get_main_message(self):
+        picture = [ImageSendMessage(original_content_url=f"{APP_URL}/static/img/S8.png",
+                                    preview_image_url=f"{APP_URL}/static/img/S8.png")]
+        main_msg = [TextSendMessage(text=text) for text in self.main_messages]
+        return picture + main_msg
+
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S9(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 9
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = ["史博館在整個日治時期，外觀始終以中央兩層樓為主，這日式木造建物的建材全採用哪裡出產的什麼木材？", "答案五個字，小城小南回憶一下，爸爸去年剛帶你們暑假去玩過也有見到唷。"]
+        self.ans = '阿里山檜木'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S10(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 10
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = ["史博館雖經整修，但仍力求忠於原創", "我記得前棟門廳之門神板，就是委託了15年前負責繪製的國寶匠師，協助完成修復的","好像是叫做...?小城小南快幫我找找看那位大師叫什麼。"]
+        self.ans = '莊武男'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S11(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 11
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = ["話說小時候，爸爸每次遠遠看到史博館的屋頂都很好奇", "上排除了有1-3隻不等的脊獸外，我一直很想知道那隻龍頭魚身、背部有劍把的圖騰是稱作什麼？"]
+        self.ans = '螭吻'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+
+    def get_main_message(self):
+        picture = [ImageSendMessage(original_content_url=f"{APP_URL}/static/img/S11.png",
+                                    preview_image_url=f"{APP_URL}/static/img/S11.png")]
+        main_msg = [TextSendMessage(text=text) for text in self.main_messages]
+        return picture + main_msg
+
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S12(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 12
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = []
+        self.ans = 'ㄔ'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+        
+    def get_main_message(self):
+        return [
+            TextSendMessage(text="這字到底怎麼念呀？google來查查...."),
+            TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ButtonsTemplate(
+                    title='這字到底怎麼念',
+                    text='Google的結果',
+                    actions=[
+                        MessageTemplateAction(
+                            label='ㄌ一/',
+                            text='ㄌ一/'
+                        ),
+                        MessageTemplateAction(
+                            label='ㄔ',
+                            text='ㄔ'
+                        ),
+                        MessageTemplateAction(
+                            label='ㄌㄩˇ',
+                            text='ㄌㄩˇ'
+                        )
+                    ]
+                )
+            )
+        ]
+    
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S13(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 13
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = []
+        self.ans = '龍溪亭'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+        
+    def get_main_message(self):
+        return [
+            TextSendMessage(text="小城小南，室內逛久了，我們出去館外透透氣吧，你們知道史博館外面有一個涼亭就是為了紀念首任館長包遵彭先生而命名的嗎，猜猜看它叫什麼名字呢？"),
+            TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ButtonsTemplate(
+                    title='涼亭名稱',
+                    text='猜猜看',
+                    actions=[
+                        MessageTemplateAction(
+                            label='敬包亭',
+                            text='敬包亭'
+                        ),
+                        MessageTemplateAction(
+                            label='遵彭亭',
+                            text='遵彭亭'
+                        ),
+                        MessageTemplateAction(
+                            label='龍溪亭',
+                            text='龍溪亭'
+                        )
+                    ]
+                )
+            )
+        ]
+    
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S14(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 14
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = []
+        self.ans = '6'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+        
+    def get_main_message(self):
+        return [
+            TextSendMessage(text="龍溪亭採六角形的建築設計，你們看上面的屋脊共有幾個我們剛剛才學到的螭吻哩？"),
+            TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ButtonsTemplate(
+                    title='屋脊數量',
+                    text='猜猜看',
+                    actions=[
+                        MessageTemplateAction(
+                            label='6',
+                            text='6'
+                        ),
+                        MessageTemplateAction(
+                            label='7',
+                            text='7'
+                        ),
+                        MessageTemplateAction(
+                            label='8',
+                            text='8'
+                        )
+                    ]
+                )
+            )
+        ]
+    
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S15(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 15
+        self.story_name = 'na'
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = []
+        self.ans = ''
+        self.reply_messages_correct = []
+        self.reply_messages_wrong = [
+            '''請往臺北當代工藝設計分館''']
+
+    def get_main_message(self):
+        return [
+            TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ButtonsTemplate(
+                    title='圓頂建築',
+                    text='咦？印象中，史博館旁有另一個圓頂建築非常特別，我們去找找在哪!!',
+                    actions=[
+                        MessageTemplateAction(
+                            label='找到了，準備開始!!',
+                            text='找到了，準備開始!!'
+                        ),
+                        MessageTemplateAction(
+                            label='我迷路了，請給提示',
+                            text='我迷路了，請給提示'
+                        )
+                    ]
+                )
+            )
+        ]
+
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        print(f"ans: {ans}")
+        if force_correct:
+            # force correct answer
+            return True, []
+        if ans == '找到了，準備開始!!':
+            return True, []
+        elif ans == '我迷路了，請給提示':
+            return True, [TextSendMessage(text=msg) for msg in self.reply_messages_wrong]
+        return False, []
+
+class S16(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 16
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = ["小城小南，你們知道這個分館的圓頂建築是仿北京祈年殿的哪個建物所設計的嗎？"]
+        self.ans = '天壇'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+    
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S17(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 17
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = []
+        self.ans = '2'
+        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+        
+    def get_main_message(self):
+        return [
+            TextSendMessage(text="試著數數整棟建築本體上，共有幾層的屋頂也出現了剛剛我們看到的脊獸哩？"),
+            TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ButtonsTemplate(
+                    title='共有幾層',
+                    text='猜猜看',
+                    actions=[
+                        MessageTemplateAction(
+                            label='1',
+                            text='1'
+                        ),
+                        MessageTemplateAction(
+                            label='2',
+                            text='2'
+                        ),
+                        MessageTemplateAction(
+                            label='3',
+                            text='3'
+                        )
+                    ]
+                )
+            )
+        ]
+    
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
+class S18(Story):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(args, kwargs)
+        self.username = kwargs.get('username', '玩家')
+        self.id = 18
+        self.story_name = ''
+        self.pre_messages = []
+        self.post_messages = []
+        self.main_messages = ["我記得戶外空間的最右側有一個特殊造型的拱門，你們看得出是什麼水果嗎？"]
+        self.ans = '蘋果'
+        self.reply_messages_correct = ['''太棒了，真是一場充實有趣的知性之旅，一邊回想兒時點滴又一邊體會著整修後的新意，頗有穿越時空的新舊融合感呀。時間還早，我們一起去逛逛外面的市集吧''']
+        self.reply_messages_wrong = [
+            '''好像不太對''']
+    
+    def check_ans(self, ans, force_correct=False, retry_count=0):
+        '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
+        if force_correct:
+            # force correct answer
+            return True, []
+        if type(ans) is str:
+            if ans == self.ans:
+                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+            else:
+                return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
+        return True, []
+
 class Ending(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
@@ -415,166 +1004,10 @@ class Ending(Story):
         self.story_name = 'Ending'
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = []
+        self.main_messages = ['''(提供破關證明圖示，供玩家至愛羊攤位兑換小禮!!!)''']
         self.ans = ''
         self.reply_messages_correct = []
         self.reply_messages_wrong = ['你已經闖關完畢囉！']
-
-    # def get_main_message(self):
-    #     sticker = [StickerSendMessage(package_id=11537, sticker_id=52002745)]
-    #     main_msg = [TextSendMessage(text=text) for text in self.main_messages]
-    #     images = [
-    #         ImageSendMessage(original_content_url = f"{APP_URL}/static/img/info.jpg", preview_image_url = f"{APP_URL}/static/img/info.jpg")
-    #         ]
-    #     return sticker + main_msg
-
-    def get_main_message(self):
-        contents = {
-            "type": "carousel",
-            "contents": [
-                {
-                    "type": "bubble",
-                    "header": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                            {
-                                "type": "text",
-                                "text": "週六小組裡到底分享了甚麼信息呢？點選以下小組信息閱讀完整版。\n中間在哪一題卡住了嗎？點選解題思路，看看各題的解題辦法！",
-                                "wrap": True
-                            }
-                        ],
-                        "height": "150px",
-                        "alignItems": "center",
-                        "justifyContent": "flex-end"
-                    },
-                    "body": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                            {
-                                "type": "button",
-                                "action": {
-                                    "type": "message",
-                                    "label": "小組訊息",
-                                    "text": "小組訊息\nhttps://drive.google.com/file/d/1Hgr4jnakPflcH1WV5F3EbUJ8PtN-vIVw/view?usp=share_link"
-                                }
-                            },
-                            {
-                                "type": "button",
-                                "action": {
-                                    "type": "message",
-                                    "label": "解題思路",
-                                    "text": "解題思路\nhttps://drive.google.com/file/d/1D7Ysl2IS_fTzHvCxvxpQoU59TwN6Rz5J/view?usp=share_link"
-                                }
-                            }
-                        ],
-                        "position": "relative"
-                    },
-                    "styles": {
-                        "header": {
-                            "separatorColor": "#dbdbdb",
-                            "separator": True
-                        },
-                        "hero": {
-                            "separator": True,
-                            "separatorColor": "#b0b0b0"
-                        },
-                        "body": {
-                            "separator": True,
-                            "separatorColor": "#b0b0b0"
-                        }
-                    }
-                },
-                {
-                    "type": "bubble",
-                    "header": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                            {
-                                "type": "text",
-                                "text": "歡迎點選以下連結更了解我們團隊，若您願意奉獻，也可參考奉獻資訊。",
-                                "wrap": True
-                            }
-                        ],
-                        "height": "150px",
-                        "alignItems": "center",
-                        "justifyContent": "flex-end"
-                    },
-                    "body": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
-                            {
-                                "type": "button",
-                                "action": {
-                                    "type": "message",
-                                    "label": "團隊介紹",
-                                    "text": "團隊介紹\n我們是一群來自台北古亭聖教會的社青和青年。我們熱衷解謎，從某一青年就讀的高中設計了linebot解謎，促發這次活動的設計。歷經5個月的技術課程和題目劇情的討論，終於在今年底正式推出！"
-                                }
-                            },
-                            {
-                                "type": "button",
-                                "action": {
-                                    "type": "message",
-                                    "label": "奉獻資訊",
-                                    "text": '''奉獻資訊\n感謝您的擺上，奉獻資訊如下，煩請於備註中填寫"Line"，以利司庫同工辨認。\n第一銀行(銀行代碼：007)\n帳號：172-10-115645\n若您需要奉獻收據，請填寫以下表單。https://docs.google.com/forms/d/e/1FAIpQLSfKnLorNmQ00Vx_qKEPKgssHsZA3T0uHlN0RHHdiUDqdhmB1Q/viewform?usp=sharing'''
-                                }
-                            }
-                        ],
-                        "position": "relative"
-                    },
-                    "styles": {
-                        "header": {
-                            "separatorColor": "#dbdbdb",
-                            "separator": True
-                        },
-                        "hero": {
-                            "separator": True,
-                            "separatorColor": "#b0b0b0"
-                        },
-                        "body": {
-                            "separator": True,
-                            "separatorColor": "#b0b0b0"
-                        }
-                    }
-                }
-            ]
-        }
-        # main_msg = [TextSendMessage(text=text) for text in self.main_messages]
-        main_msg = [
-            TextSendMessage(text='''這些素材真是太可以了！'''),
-            StickerSendMessage(package_id=11537, sticker_id=52002745),
-            TextSendMessage(text='''作為福利，我讓你搶先看週六小組的信息內容'''),
-            FlexSendMessage(alt_text='flex_contents', contents=contents),
-            # TemplateSendMessage(
-            #     alt_text='Buttons template',
-            #     template=ButtonsTemplate(
-            #         title='關於我們',
-            #         text='想更深入了解我們團隊嗎？請點選下面按鈕',
-            #         actions=[
-            #             MessageTemplateAction(
-            #                 label='搶先看週六小組的信息內容',
-            #                 text=f'搶先看週六小組的信息內容:(牧師講章)'
-            #             ),
-            #             MessageTemplateAction(
-            #                 label='解題思路',
-            #                 text=f'解題思路:TBD'
-            #             ),
-            #             MessageTemplateAction(
-            #                 label='團隊介紹',
-            #                 text=f'團隊介紹:TBD'
-            #             ),
-            #             MessageTemplateAction(
-            #                 label='奉獻資訊',
-            #                 text=f'奉獻資訊:TBD'
-            #             ),
-            #         ]
-            #     )
-            # )
-        ]
-        return main_msg
 
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''

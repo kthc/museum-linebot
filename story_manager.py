@@ -42,6 +42,21 @@ class Story_Manager:
             story.S1(),
             story.S2(),
             story.S3(),
+            story.S4(),
+            story.S5(),
+            story.S6(),
+            story.S7(),
+            story.S8(),
+            story.S9(),
+            story.S10(),
+            story.S11(),
+            story.S12(),
+            story.S13(),
+            story.S14(),
+            story.S15(),
+            story.S16(),
+            story.S17(),
+            story.S18(),
             story.Ending()
         ]
 

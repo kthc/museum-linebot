@@ -1,5 +1,7 @@
-# ngrok
-ngrok http 5001
+# LOCAL DEBUG
+1. ngrok http 5001
+2. copy ngrok URL to linebot console
+3. run app.py
 
 # serve production
 cd venv/Scripts
