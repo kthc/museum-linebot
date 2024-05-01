@@ -327,7 +327,7 @@ class S2(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
         self.username = kwargs.get('username', '玩家')
-        self.id = 16
+        self.id = 2
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
@@ -340,6 +340,7 @@ class S2(Story):
 
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        ans = f"{ans}"
         if force_correct:
             # force correct answer
             return True, []
@@ -356,7 +357,7 @@ class S3(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
         self.username = kwargs.get('username', '玩家')
-        self.id = 16
+        self.id = 3
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
@@ -396,6 +397,7 @@ class S3(Story):
         if force_correct:
             # force correct answer
             return True, []
+        ans = f"{ans}"
         if type(ans) is str:
             if ans == "":
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
