@@ -16,6 +16,7 @@ from linebot.models import (
     TemplateSendMessage,
     ButtonsTemplate,
     MessageTemplateAction,
+    ConfirmTemplate,
     QuickReply,
     QuickReplyButton,
     PostbackAction,
@@ -242,7 +243,7 @@ class Welcome(Story):
         self.id = 0
         self.story_name = 'Welcome2'
         self.pre_messages = []
-        self.post_messages = []
+        self.post_messages = ['小城小南，那裡有適合兒童的創意空間哩~']
         self.main_messages = []
         self.ans = '可以啊'
         self.reply_messages_correct = []
@@ -255,7 +256,7 @@ class Welcome(Story):
             ),
             TextSendMessage(
                 text='夏日的午後，我帶著一雙兒女悠閒散步在南海路上，不同於以往目光總朝著第一學府瞧過去，這次我被對面【城南．那一味】的文宣所吸引，這不就是我兒時常玩耍的史博館嗎？成家立業後，少有機會來訪，沒想到它剛換上新裝、整修落成。小時候我曾想過，如果這裡能有更多適合親子的空間規劃該有多好，如今身為人父，懷著期待的興奮感，忍不住拉著小城和小南一探究竟去，準備好了嗎？Go!!',
-            quick_reply=QuickReply(
+                quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
                             action=MessageAction(
@@ -268,32 +269,54 @@ class Welcome(Story):
 
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
-        return True, []
+        return True, [TextSendMessage(text=msg) for msg in self.post_messages]
 
 
-class Welcome2(Story):
+class S1(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
         self.username = kwargs.get('username', '玩家')
         self.id = 1
         self.story_name = 'Welcome2'
-        self.pre_messages = ['完全忘記我這週要帶小組！到現在還沒想好要帶什麼信息和活動...']
+        self.pre_messages = []
         self.post_messages = []
         self.main_messages = [
-            f'''這次範圍在馬太福音，你能幫幫我嗎？\n(請輸入｢可以啊｣開始遊戲；輸入｢reset｣重新開始遊戲；輸入｢skip｣跳題。)''']
+            f'''小城小南，那裡有適合兒童的創意空間哩~''']
         self.ans = '可以啊'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
-            '''喔不！ 原來你還沒準備好。沒關係，隨時輸入"可以啊"讓我知道可以開始囉！''']
+            '''請往史博館B1兒童創意空間''']
+
+    def get_main_message(self):
+        return [
+            TemplateSendMessage(
+                alt_text='Buttons template',
+                template=ConfirmTemplate(
+                    text='小城小南，那裡有適合兒童的創意空間哩~',
+                    actions=[
+                        MessageAction(
+                            label='ready',
+                            text='找到了，準備開始!!'
+                        ),
+                        MessageAction(
+                            label='lost',
+                            text='我迷路了，請給提示'
+                        )
+                    ]
+                )
+            )
+        ]
 
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
+        print(f"ans: {ans}")
         if force_correct:
             # force correct answer
             return True, []
-        if ans == self.ans:
+        if ans == 'ready':
             return True, []
-        return False, [TextSendMessage(text=msg) for msg in self.reply_messages_wrong]
+        elif ans == 'lost':
+            return True, [TextSendMessage(text=msg) for msg in self.reply_messages_wrong]
 
 
 class P7(Story):
@@ -588,7 +611,6 @@ class Question3(Story):
                 ]
             elif (selection_value == '$Q3_yes' or selection_value == '$Q3_yes_2'):
                 return False, [TextSendMessage(text=self.reply_messages_wrong[1])]
-
 
 
 class P17(Story):
@@ -912,14 +934,14 @@ class Question6_b_1(Story):
             return False, [
                 TextSendMessage(text='怎麼感覺哪裡怪怪的，再想一下好了！\n如果後悔了想更改挑戰模式的話，可以重選喔！',
                                 quick_reply=QuickReply(
-                    items=[
-                        QuickReplyButton(
-                            action=PostbackAction(
-                                label='重新選擇吧', data='$Q6_reset', display_text='重新選擇')
-                        )
-                    ]
-                )
-                )
+                                    items=[
+                                        QuickReplyButton(
+                                            action=PostbackAction(
+                                                label='重新選擇吧', data='$Q6_reset', display_text='重新選擇')
+                                        )
+                                    ]
+                                )
+                                )
             ]
         if ans != 'anna' and ans != 'Anna':
             return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
