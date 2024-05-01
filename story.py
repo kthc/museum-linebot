@@ -379,11 +379,11 @@ class S3(Story):
                             label='花環',
                             text='花環'
                         ),
-                        PostbackTemplateAction(
+                        MessageTemplateAction(
                             label='艾草束',
                             text='艾草束'
                         ),
-                        PostbackTemplateAction(
+                        MessageTemplateAction(
                             label='花朵',
                             text='花朵'
                         )
