@@ -291,16 +291,19 @@ class S1(Story):
         return [
             TemplateSendMessage(
                 alt_text='Buttons template',
-                template=ConfirmTemplate(
-                    text='小城小南，那裡有適合兒童的創意空間哩~',
+                template=ButtonsTemplate(
+                    title='小城小南，那裡有適合兒童的創意空間哩~',
+                    text='請選擇',
                     actions=[
-                        MessageAction(
+                        PostbackTemplateAction(
                             label='找到了，準備開始!!',
-                            text='找到了，準備開始!!'
+                            text='找到了，準備開始!!',
+                            data='S1&ready'
                         ),
-                        MessageAction(
+                        PostbackTemplateAction(
                             label='我迷路了，請給提示',
-                            text='我迷路了，請給提示'
+                            text='我迷路了，請給提示',
+                            data='S1&lost'
                         )
                     ]
                 )
