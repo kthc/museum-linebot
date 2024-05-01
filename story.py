@@ -277,12 +277,12 @@ class S1(Story):
         super().__init__(args, kwargs)
         self.username = kwargs.get('username', '玩家')
         self.id = 1
-        self.story_name = 'Welcome2'
+        self.story_name = 'na'
         self.pre_messages = []
         self.post_messages = []
         self.main_messages = [
             f'''小城小南，那裡有適合兒童的創意空間哩~''']
-        self.ans = '可以啊'
+        self.ans = ''
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''請往史博館B1兒童創意空間''']
