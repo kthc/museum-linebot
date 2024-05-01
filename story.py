@@ -243,7 +243,7 @@ class Welcome(Story):
         self.id = 0
         self.story_name = 'Welcome2'
         self.pre_messages = []
-        self.post_messages = ['小城小南，那裡有適合兒童的創意空間哩~']
+        self.post_messages = []
         self.main_messages = []
         self.ans = '可以啊'
         self.reply_messages_correct = []
@@ -281,7 +281,7 @@ class S1(Story):
         self.pre_messages = []
         self.post_messages = []
         self.main_messages = [
-            f'''小城小南，那裡有適合兒童的創意空間哩~''']
+            f'''''']
         self.ans = ''
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -295,11 +295,11 @@ class S1(Story):
                     text='小城小南，那裡有適合兒童的創意空間哩~',
                     actions=[
                         MessageAction(
-                            label='ready',
+                            label='找到了，準備開始!!',
                             text='找到了，準備開始!!'
                         ),
                         MessageAction(
-                            label='lost',
+                            label='我迷路了，請給提示',
                             text='我迷路了，請給提示'
                         )
                     ]
@@ -313,10 +313,11 @@ class S1(Story):
         if force_correct:
             # force correct answer
             return True, []
-        if ans == 'ready':
+        if ans == '找到了，準備開始!!':
             return True, []
-        elif ans == 'lost':
+        elif ans == '我迷路了，請給提示':
             return True, [TextSendMessage(text=msg) for msg in self.reply_messages_wrong]
+        return False, []
 
 
 class P7(Story):
