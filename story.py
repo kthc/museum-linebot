@@ -280,8 +280,7 @@ class S1(Story):
         self.story_name = 'na'
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = [
-            f'''''']
+        self.main_messages = []
         self.ans = ''
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -292,8 +291,8 @@ class S1(Story):
             TemplateSendMessage(
                 alt_text='Buttons template',
                 template=ButtonsTemplate(
-                    title='小城小南，那裡有適合兒童的創意空間哩~',
-                    text='請選擇',
+                    title='兒童的創意空間',
+                    text='小城小南，哪裡有適合兒童的創意空間哩~請選擇',
                     actions=[
                         PostbackTemplateAction(
                             label='找到了，準備開始!!',
@@ -372,8 +371,8 @@ class S3(Story):
             TemplateSendMessage(
                 alt_text='Buttons template',
                 template=ButtonsTemplate(
-                    title='哇，這有馬槽聖嬰的小造景耶，讓我想起了小時候在附近教會安親班的點滴，小南你猜這個節日是對應上面球裡的什麼哩？',
-                    text='請選擇',
+                    title='馬槽聖嬰的小造景',
+                    text='哇，這有馬槽聖嬰的小造景耶，讓我想起了小時候在附近教會安親班的點滴，小南你猜這個節日是對應上面球裡的什麼哩？',
                     actions=[
                         MessageTemplateAction(
                             label='花環',
