@@ -1,0 +1,9 @@
+# ngrok
+ngrok http 5001
+
+# serve production
+cd venv/Scripts
+activate
+cd ..
+cd ..
+waitress-serve --port 5001 --call "app_ngrok:create_app"
