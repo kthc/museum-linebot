@@ -40,6 +40,8 @@ class Story_Manager:
         self.stories = [
             story.Welcome(username=user_name),  
             story.S1(),
+            story.S2(),
+            story.S3(),
             story.Ending()
         ]
 
