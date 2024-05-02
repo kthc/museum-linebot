@@ -251,6 +251,7 @@ class Welcome(Story):
 
     def get_main_message(self):
         return [
+            TextSendMessage(text="前情提要"),
             TextSendMessage(
                 text='夏日的午後，我帶著一雙兒女悠閒散步在南海路上，不同於以往目光總朝著第一學府瞧過去，這次我被對面【城南．那一味】的文宣所吸引，這不就是我兒時常玩耍的史博館嗎？成家立業後，少有機會來訪，沒想到它剛換上新裝、整修落成。小時候我曾想過，如果這裡能有更多適合親子的空間規劃該有多好，如今身為人父，懷著期待的興奮感，忍不住拉著小城和小南一探究竟去，準備好了嗎？Go!!',
                 quick_reply=QuickReply(
@@ -286,9 +287,9 @@ class S1(Story):
     def get_main_message(self):
         return [
             TemplateSendMessage(
-                alt_text='Buttons template',
+                alt_text='兒童創意空間',
                 template=ButtonsTemplate(
-                    title='兒童的創意空間',
+                    title='兒童創意空間',
                     text='小城小南，哪裡有適合兒童的創意空間哩~請選擇',
                     actions=[
                         MessageTemplateAction(
@@ -365,9 +366,9 @@ class S3(Story):
         return [
             TextSendMessage(text="哇，這有馬槽聖嬰的小造景耶，讓我想起了小時候在附近教會安親班的點滴，小南你猜這個節日是對應上面球裡的什麼哩？"),
             TemplateSendMessage(
-                alt_text='Buttons template',
+                alt_text='馬槽聖嬰造景',
                 template=ButtonsTemplate(
-                    title='馬槽聖嬰的小造景',
+                    title='馬槽聖嬰造景',
                     text='選選看',
                     actions=[
                         MessageTemplateAction(
@@ -449,9 +450,9 @@ class S5(Story):
         return [
             TextSendMessage(text="小城小南，快看那邊的兒童彩繪圖好可愛呀，小南快來數數裡面有幾隻妳最愛的貓？"),
             TemplateSendMessage(
-                alt_text='Buttons template',
+                alt_text='兒童彩繪',
                 template=ButtonsTemplate(
-                    title='兒童彩繪圖',
+                    title='兒童彩繪',
                     text='數數看',
                     actions=[
                         MessageTemplateAction(
@@ -503,9 +504,9 @@ class S6(Story):
     def get_main_message(self):
         return [
             TemplateSendMessage(
-                alt_text='Buttons template',
+                alt_text='雕築史跡展',
                 template=ButtonsTemplate(
-                    title='改建過程的展覽',
+                    title='雕築史跡展',
                     text='老爸我是學建築的，我們來找找有沒有介紹改建過程的展覽。',
                     actions=[
                         MessageTemplateAction(
@@ -662,8 +663,8 @@ class S11(Story):
             '''好像不太對''']
 
     def get_main_message(self):
-        picture = [ImageSendMessage(original_content_url=f"{APP_URL}/static/img/S11.png",
-                                    preview_image_url=f"{APP_URL}/static/img/S11.png")]
+        picture = [ImageSendMessage(original_content_url=f"{APP_URL}/static/img/S11.jpg",
+                                    preview_image_url=f"{APP_URL}/static/img/S11.jpg")]
         main_msg = [TextSendMessage(text=text) for text in self.main_messages]
         return picture + main_msg
 
@@ -698,9 +699,9 @@ class S12(Story):
         return [
             TextSendMessage(text="這字到底怎麼念呀？google來查查...."),
             TemplateSendMessage(
-                alt_text='Buttons template',
+                alt_text='到底怎麼念',
                 template=ButtonsTemplate(
-                    title='這字到底怎麼念',
+                    title='到底怎麼念',
                     text='Google的結果',
                     actions=[
                         MessageTemplateAction(
@@ -751,9 +752,9 @@ class S13(Story):
         return [
             TextSendMessage(text="小城小南，室內逛久了，我們出去館外透透氣吧，你們知道史博館外面有一個涼亭就是為了紀念首任館長包遵彭先生而命名的嗎，猜猜看它叫什麼名字呢？"),
             TemplateSendMessage(
-                alt_text='Buttons template',
+                alt_text='涼亭命名由來',
                 template=ButtonsTemplate(
-                    title='涼亭名稱',
+                    title='涼亭命名由來',
                     text='猜猜看',
                     actions=[
                         MessageTemplateAction(
@@ -804,9 +805,9 @@ class S14(Story):
         return [
             TextSendMessage(text="龍溪亭採六角形的建築設計，你們看上面的屋脊共有幾個我們剛剛才學到的螭吻哩？"),
             TemplateSendMessage(
-                alt_text='Buttons template',
+                alt_text='屋脊螭吻有幾隻',
                 template=ButtonsTemplate(
-                    title='屋脊數量',
+                    title='屋脊螭吻有幾隻',
                     text='猜猜看',
                     actions=[
                         MessageTemplateAction(
@@ -856,9 +857,9 @@ class S15(Story):
     def get_main_message(self):
         return [
             TemplateSendMessage(
-                alt_text='Buttons template',
+                alt_text='圓頂建築在哪裡',
                 template=ButtonsTemplate(
-                    title='圓頂建築',
+                    title='圓頂建築在哪裡',
                     text='咦？印象中，史博館旁有另一個圓頂建築非常特別，我們去找找在哪!!',
                     actions=[
                         MessageTemplateAction(
@@ -931,9 +932,9 @@ class S17(Story):
         return [
             TextSendMessage(text="試著數數整棟建築本體上，共有幾層的屋頂也出現了剛剛我們看到的脊獸哩？"),
             TemplateSendMessage(
-                alt_text='Buttons template',
+                alt_text='脊獸出沒共幾層',
                 template=ButtonsTemplate(
-                    title='共有幾層',
+                    title='脊獸出沒共幾層',
                     text='猜猜看',
                     actions=[
                         MessageTemplateAction(
@@ -1001,7 +1002,7 @@ class Ending(Story):
         self.story_name = 'Ending'
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ['''(提供破關證明圖示，供玩家至愛羊攤位兑換小禮!!!)''']
+        self.main_messages = ['''恭喜破關!! 請出示以下圖示至愛羊全人關懷協會攤位兌換小點心!!!''']
         self.ans = ''
         self.reply_messages_correct = []
         self.reply_messages_wrong = ['你已經闖關完畢囉！']
