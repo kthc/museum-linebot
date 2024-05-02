@@ -342,7 +342,7 @@ class S2(Story):
             if ans == "":
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
             elif ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[1])]
         return True, []
@@ -397,7 +397,7 @@ class S3(Story):
             if ans == "":
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
             elif ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -425,7 +425,7 @@ class S4(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -555,7 +555,7 @@ class S7(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -588,7 +588,7 @@ class S8(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -615,7 +615,7 @@ class S9(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -642,7 +642,7 @@ class S10(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -675,7 +675,7 @@ class S11(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -728,7 +728,7 @@ class S12(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -781,7 +781,7 @@ class S13(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -834,7 +834,7 @@ class S14(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -908,7 +908,7 @@ class S16(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -961,7 +961,7 @@ class S17(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
@@ -988,7 +988,7 @@ class S18(Story):
             return True, []
         if type(ans) is str:
             if ans == self.ans:
-                return True, [TextSendMessage(text=self.reply_messages_correct[0])]
+                return True, []
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
