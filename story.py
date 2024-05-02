@@ -252,9 +252,6 @@ class Welcome(Story):
     def get_main_message(self):
         return [
             TextSendMessage(
-                text=f'前情提要:'
-            ),
-            TextSendMessage(
                 text='夏日的午後，我帶著一雙兒女悠閒散步在南海路上，不同於以往目光總朝著第一學府瞧過去，這次我被對面【城南．那一味】的文宣所吸引，這不就是我兒時常玩耍的史博館嗎？成家立業後，少有機會來訪，沒想到它剛換上新裝、整修落成。小時候我曾想過，如果這裡能有更多適合親子的空間規劃該有多好，如今身為人父，懷著期待的興奮感，忍不住拉著小城和小南一探究竟去，準備好了嗎？Go!!',
                 quick_reply=QuickReply(
                     items=[
@@ -330,7 +327,7 @@ class S2(Story):
         self.post_messages = []
         self.main_messages = ["(映入眼廉是垂掛一組的別緻透明玻璃球) 小城你數數有幾顆？"]
         self.ans = '15'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''你有輸入數字嗎?''',
             '''好像不太對，再數數看''']
@@ -360,7 +357,7 @@ class S3(Story):
         self.post_messages = []
         self.main_messages = []
         self.ans = '花環'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對!''']
 
@@ -416,7 +413,7 @@ class S4(Story):
         self.post_messages = []
         self.main_messages = ["誒，旁邊的這個是什麼啊？（看向旁邊）原來是計時工具啊，小城你從小學琴，哪種是你最熟悉的計時工具？"]
         self.ans = '節拍器'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
 
@@ -546,7 +543,7 @@ class S7(Story):
         self.post_messages = []
         self.main_messages = ["小城你猜，史博館在1916年時曾作為台灣勸業共進會的什麼場地使用？"]
         self.ans = '迎賓館'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
 
@@ -573,7 +570,7 @@ class S8(Story):
         self.post_messages = []
         self.main_messages = ["原來史博館在1960年代早期的大廳上方有好細緻的龍鳳天花板，小南你看得出內圈是哪四個字嗎？"]
         self.ans = '吉祥如意'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
 
@@ -606,7 +603,7 @@ class S9(Story):
         self.post_messages = []
         self.main_messages = ["史博館在整個日治時期，外觀始終以中央兩層樓為主，這日式木造建物的建材全採用哪裡出產的什麼木材？", "答案五個字，小城小南回憶一下，爸爸去年剛帶你們暑假去玩過也有見到唷。"]
         self.ans = '阿里山檜木'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
 
@@ -633,7 +630,7 @@ class S10(Story):
         self.post_messages = []
         self.main_messages = ["史博館雖經整修，但仍力求忠於原創", "我記得前棟門廳之門神板，就是委託了15年前負責繪製的國寶匠師，協助完成修復的","好像是叫做...?小城小南快幫我找找看那位大師叫什麼。"]
         self.ans = '莊武男'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
 
@@ -660,7 +657,7 @@ class S11(Story):
         self.post_messages = []
         self.main_messages = ["話說小時候，爸爸每次遠遠看到史博館的屋頂都很好奇", "上排除了有1-3隻不等的脊獸外，我一直很想知道那隻龍頭魚身、背部有劍把的圖騰是稱作什麼？"]
         self.ans = '螭吻'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
 
@@ -693,7 +690,7 @@ class S12(Story):
         self.post_messages = []
         self.main_messages = []
         self.ans = 'ㄔ'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
         
@@ -746,7 +743,7 @@ class S13(Story):
         self.post_messages = []
         self.main_messages = []
         self.ans = '龍溪亭'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
         
@@ -799,7 +796,7 @@ class S14(Story):
         self.post_messages = []
         self.main_messages = []
         self.ans = '6'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
         
@@ -899,7 +896,7 @@ class S16(Story):
         self.post_messages = []
         self.main_messages = ["小城小南，你們知道這個分館的圓頂建築是仿北京祈年殿的哪個建物所設計的嗎？"]
         self.ans = '天壇'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
     
@@ -926,7 +923,7 @@ class S17(Story):
         self.post_messages = []
         self.main_messages = []
         self.ans = '2'
-        self.reply_messages_correct = ['''你答對了''']
+        self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
         
