@@ -1011,7 +1011,7 @@ class Ending(Story):
         picture = [ImageSendMessage(original_content_url=f"{APP_URL}/static/img/SuccessLogo.jpg",
                                     preview_image_url=f"{APP_URL}/static/img/SuccessLogo.jpg")]
         main_msg = [TextSendMessage(text=text) for text in self.main_messages]
-        return picture + main_msg
+        return main_msg + picture
 
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
