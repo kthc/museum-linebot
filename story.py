@@ -348,6 +348,7 @@ class S2(Story):
                 return False, [TextSendMessage(text=self.reply_messages_wrong[1])]
         return True, []
 
+
 class S3(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
@@ -364,7 +365,8 @@ class S3(Story):
 
     def get_main_message(self):
         return [
-            TextSendMessage(text="哇，這有馬槽聖嬰的小造景耶，讓我想起了小時候在附近教會安親班的點滴，小南你猜這個節日是對應上面球裡的什麼哩？"),
+            TextSendMessage(
+                text="哇，這有馬槽聖嬰的小造景耶，讓我想起了小時候在附近教會安親班的點滴，小南你猜這個節日是對應上面球裡的什麼哩？"),
             TemplateSendMessage(
                 alt_text='馬槽聖嬰造景',
                 template=ButtonsTemplate(
@@ -412,7 +414,8 @@ class S4(Story):
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ["誒，旁邊的這個是什麼啊？（看向旁邊）原來是計時工具啊，小城你從小學琴，哪種是你最熟悉的計時工具？"]
+        self.main_messages = [
+            "誒，旁邊的這個是什麼啊？（看向旁邊）原來是計時工具啊，小城你從小學琴，哪種是你最熟悉的計時工具？"]
         self.ans = '節拍器'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -442,7 +445,8 @@ class S5(Story):
         self.post_messages = []
         self.main_messages = []
         self.ans = '2'
-        self.reply_messages_correct = ["Wow!! 這個親子空間寓教於樂又設計用心超棒的，下次我們再來玩。(步行上樓，經過了記憶中熟悉的老牌咖啡廳，改裝後的它更顯恬靜怡然的氛圍)"]
+        self.reply_messages_correct = [
+            "Wow!! 這個親子空間寓教於樂又設計用心超棒的，下次我們再來玩。(步行上樓，經過了記憶中熟悉的老牌咖啡廳，改裝後的它更顯恬靜怡然的氛圍)"]
         self.reply_messages_wrong = [
             '''好像不太對!''']
 
@@ -486,6 +490,7 @@ class S5(Story):
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
+
 
 class S6(Story):
     def __init__(self, *args, **kwargs) -> None:
@@ -534,6 +539,7 @@ class S6(Story):
             return True, [TextSendMessage(text=msg) for msg in self.reply_messages_wrong]
         return False, []
 
+
 class S7(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
@@ -560,6 +566,7 @@ class S7(Story):
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
+
 
 class S8(Story):
     def __init__(self, *args, **kwargs) -> None:
@@ -594,6 +601,7 @@ class S8(Story):
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
 
+
 class S9(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
@@ -602,7 +610,8 @@ class S9(Story):
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ["史博館在整個日治時期，外觀始終以中央兩層樓為主，這日式木造建物的建材全採用哪裡出產的什麼木材？", "答案五個字，小城小南回憶一下，爸爸去年剛帶你們暑假去玩過也有見到唷。"]
+        self.main_messages = [
+            "史博館在整個日治時期，外觀始終以中央兩層樓為主，這日式木造建物的建材全採用哪裡出產的什麼木材？", "答案五個字，小城小南回憶一下，爸爸去年剛帶你們暑假去玩過也有見到唷。"]
         self.ans = '阿里山檜木'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -621,6 +630,7 @@ class S9(Story):
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
 
+
 class S10(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
@@ -629,7 +639,8 @@ class S10(Story):
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ["史博館雖經整修，但仍力求忠於原創", "我記得前棟門廳之門神板，就是委託了15年前負責繪製的國寶匠師，協助完成修復的","好像是叫做...?小城小南快幫我找找看那位大師叫什麼。"]
+        self.main_messages = [
+            "史博館雖經整修，但仍力求忠於原創", "我記得前棟門廳之門神板，就是委託了15年前負責繪製的國寶匠師，協助完成修復的", "好像是叫做...?小城小南快幫我找找看那位大師叫什麼。"]
         self.ans = '莊武男'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -648,6 +659,7 @@ class S10(Story):
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
 
+
 class S11(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
@@ -656,7 +668,8 @@ class S11(Story):
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ["話說小時候，爸爸每次遠遠看到史博館的屋頂都很好奇", "上排除了有1-3隻不等的脊獸外，我一直很想知道那隻龍頭魚身、背部有劍把的圖騰是稱作什麼？"]
+        self.main_messages = ["話說小時候，爸爸每次遠遠看到史博館的屋頂都很好奇",
+                              "上排除了有1-3隻不等的脊獸外，我一直很想知道那隻龍頭魚身、背部有劍把的圖騰是稱作什麼？"]
         self.ans = '螭吻'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -681,6 +694,7 @@ class S11(Story):
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
 
+
 class S12(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
@@ -694,7 +708,7 @@ class S12(Story):
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
-        
+
     def get_main_message(self):
         return [
             TextSendMessage(text="這字到底怎麼念呀？google來查查...."),
@@ -720,7 +734,7 @@ class S12(Story):
                 )
             )
         ]
-    
+
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
         ans = f"{ans}"
@@ -733,6 +747,7 @@ class S12(Story):
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
+
 
 class S13(Story):
     def __init__(self, *args, **kwargs) -> None:
@@ -747,10 +762,11 @@ class S13(Story):
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
-        
+
     def get_main_message(self):
         return [
-            TextSendMessage(text="小城小南，室內逛久了，我們出去館外透透氣吧，你們知道史博館外面有一個涼亭就是為了紀念首任館長包遵彭先生而命名的嗎，猜猜看它叫什麼名字呢？"),
+            TextSendMessage(
+                text="小城小南，室內逛久了，我們出去館外透透氣吧，你們知道史博館外面有一個涼亭就是為了紀念首任館長包遵彭先生而命名的嗎，猜猜看它叫什麼名字呢？"),
             TemplateSendMessage(
                 alt_text='涼亭命名由來',
                 template=ButtonsTemplate(
@@ -773,7 +789,7 @@ class S13(Story):
                 )
             )
         ]
-    
+
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
         ans = f"{ans}"
@@ -786,6 +802,7 @@ class S13(Story):
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
+
 
 class S14(Story):
     def __init__(self, *args, **kwargs) -> None:
@@ -800,7 +817,7 @@ class S14(Story):
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
-        
+
     def get_main_message(self):
         return [
             TextSendMessage(text="龍溪亭採六角形的建築設計，你們看上面的屋脊共有幾個我們剛剛才學到的螭吻哩？"),
@@ -826,7 +843,7 @@ class S14(Story):
                 )
             )
         ]
-    
+
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
         ans = f"{ans}"
@@ -839,6 +856,7 @@ class S14(Story):
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
+
 
 class S15(Story):
     def __init__(self, *args, **kwargs) -> None:
@@ -887,6 +905,7 @@ class S15(Story):
             return True, [TextSendMessage(text=msg) for msg in self.reply_messages_wrong]
         return False, []
 
+
 class S16(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
@@ -895,12 +914,13 @@ class S16(Story):
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ["小城小南，你們知道這個分館的圓頂建築是仿北京祈年殿的哪個建物所設計的嗎？"]
+        self.main_messages = [
+            "小城小南，你們知道這個分館的圓頂建築是仿北京祈年殿的哪個建物所設計的嗎？(建議可問館員或是Google大師)"]
         self.ans = '天壇'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
-    
+
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
         ans = f"{ans}"
@@ -913,6 +933,7 @@ class S16(Story):
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
+
 
 class S17(Story):
     def __init__(self, *args, **kwargs) -> None:
@@ -927,7 +948,7 @@ class S17(Story):
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
             '''好像不太對''']
-        
+
     def get_main_message(self):
         return [
             TextSendMessage(text="試著數數整棟建築本體上，共有幾層的屋頂也出現了剛剛我們看到的脊獸哩？"),
@@ -953,7 +974,7 @@ class S17(Story):
                 )
             )
         ]
-    
+
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
         ans = f"{ans}"
@@ -966,6 +987,7 @@ class S17(Story):
             else:
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
+
 
 class S18(Story):
     def __init__(self, *args, **kwargs) -> None:
@@ -977,10 +999,11 @@ class S18(Story):
         self.post_messages = []
         self.main_messages = ["我記得戶外空間的最右側有一個特殊造型的拱門，你們看得出是什麼水果嗎？"]
         self.ans = '蘋果'
-        self.reply_messages_correct = ['''太棒了，真是一場充實有趣的知性之旅，一邊回想兒時點滴又一邊體會著整修後的新意，頗有穿越時空的新舊融合感呀。時間還早，我們一起去逛逛外面的市集吧''']
+        self.reply_messages_correct = [
+            '''太棒了，真是一場充實有趣的知性之旅，一邊回想兒時點滴又一邊體會著整修後的新意，頗有穿越時空的新舊融合感呀。時間還早，我們一起去逛逛外面的市集吧''']
         self.reply_messages_wrong = [
             '''好像不太對''']
-    
+
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
         ans = f"{ans}"
@@ -994,6 +1017,7 @@ class S18(Story):
                 return False, [TextSendMessage(text=self.reply_messages_wrong[0])]
         return True, []
 
+
 class Ending(Story):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(args, kwargs)
@@ -1002,15 +1026,26 @@ class Ending(Story):
         self.story_name = 'Ending'
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ['''恭喜破關!! 請出示以下圖示至愛羊全人關懷協會攤位兌換小點心!!!''']
+        self.main_messages = []
         self.ans = ''
         self.reply_messages_correct = []
         self.reply_messages_wrong = ['你已經闖關完畢囉！']
-    
+
     def get_main_message(self):
         picture = [ImageSendMessage(original_content_url=f"{APP_URL}/static/img/SuccessLogo.jpg",
                                     preview_image_url=f"{APP_URL}/static/img/SuccessLogo.jpg")]
-        main_msg = [TextSendMessage(text=text) for text in self.main_messages]
+        main_msg = [TextSendMessage(
+            text='''恭喜破關!! 請出示以上圖示至愛羊全人關懷協會攤位兌換小點心!!!''',
+            quick_reply=QuickReply(
+                    items=[
+                        QuickReplyButton(
+                            action=MessageAction(
+                                label='[工作人員兌換紐]', text='已兌換完成')
+                        )
+                    ]
+                    )
+        )
+        ]
         return main_msg + picture
 
     def check_ans(self, ans, force_correct=False, retry_count=0):
