@@ -20,6 +20,7 @@ class BibleDB:
         self.con.close()
     
     def create_table(self):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
             f"""CREATE TABLE IF NOT EXISTS {self.user_table} (UserID VARCHAR(255), CurStoryID int, Finished int, LoginCount int, RetryCount int);""")
@@ -36,9 +37,11 @@ class BibleDB:
                 PRIMARY KEY (UserID, CurStoryID));""")
         self.con.commit()
         cur.close()
+        self.close()
         print(f'{self.selection_table} table created')
     
     def drop_table(self):
+        self.connect()
         tables = [self.user_table, self.selection_table]
         for table in tables:
             cur = self.con.cursor()
@@ -46,12 +49,15 @@ class BibleDB:
             self.con.commit()
             cur.close()
             print(f'Dropped {table} Table!')
+        self.close()
     
     def execute(self, sql):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(sql)
         data = cur.fetchall()
         cur.close()
+        self.close()
         return data
 
     def get_storyid_by_userid(self, userid):
@@ -60,11 +66,13 @@ class BibleDB:
         :param str user_id: User ID
         :return int: current story id, return 0 if not found this user id
         """
+        self.connect()
         cur = self.con.cursor()
         users = cur.execute(
         f"""SELECT CurStoryID, Finished FROM {self.user_table} WHERE UserID='{userid}'; """)
         users = cur.fetchall()
         cur.close()
+        self.close()
         if len(users) > 0:
             return users[0][0]
         else:
@@ -72,11 +80,13 @@ class BibleDB:
             return 0
 
     def get_finished_by_userid(self, userid):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT Finished FROM {self.user_table} WHERE UserID='{userid}'; """)
         users = cur.fetchall()
         cur.close()
+        self.close()
         if len(users) > 0:
             return users[0][0] == 1
         else:
@@ -84,6 +94,7 @@ class BibleDB:
             return False
 
     def add_new_user(self, userid):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT * FROM {self.user_table} WHERE UserID='{userid}'; """)
@@ -94,28 +105,35 @@ class BibleDB:
             cur.execute(sql, (userid, 0, 0, 1,0))
             self.con.commit()
             cur.close()
+            self.close()
             return 1
         else:
             print(f'UserID {userid} existed! Not allow to add new one')
             login_count = self.update_login_count(userid)
+            self.close()
             return login_count
 
     def delete_user(self, userid):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""DELETE FROM {self.user_table} WHERE UserID='{userid}'; """)
         self.con.commit()
         cur.close()
+        self.close()
 
     def check_user_exist(self, userid):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT * FROM {self.user_table} WHERE UserID='{userid}'; """)
         users = cur.fetchall()
         cur.close()
+        self.close()
         return len(users) > 0
 
     def update_login_count(self, userid):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT LoginCount FROM {self.user_table} WHERE UserID='{userid}'; """)
@@ -128,11 +146,14 @@ class BibleDB:
             cur.execute(sql, (login_count+1,userid))
             self.con.commit()
             cur.close()
+            self.close()
             return login_count+1
         else:
             cur.close()
+            self.close()
 
     def update_story_id(self, userid, storyid):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT * FROM {self.user_table} WHERE UserID='{userid}'; """)
@@ -144,8 +165,10 @@ class BibleDB:
             cur.execute(sql, (storyid,userid))
             self.con.commit()
         cur.close()
+        self.close()
 
     def update_finished(self, userid, finished:int):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT * FROM {self.user_table} WHERE UserID='{userid}'; """)
@@ -157,6 +180,7 @@ class BibleDB:
             cur.execute(sql, (finished,userid))
             self.con.commit()
         cur.close()
+        self.close()
 
     def get_retry_count_by_userid(self, userid):
         """Get retry counts for this user_id
@@ -164,11 +188,13 @@ class BibleDB:
         :param str user_id: User ID
         :return int: current retry_count, return 0 if not found this user id
         """
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT RetryCount, Finished FROM {self.user_table} WHERE UserID='{userid}'; """)
         users = cur.fetchall()
         cur.close()
+        self.close()
         if len(users) > 0:
             return users[0][0]
         else:
@@ -176,6 +202,7 @@ class BibleDB:
             return 0
 
     def clear_retry_count(self, userid):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT * FROM {self.user_table} WHERE UserID='{userid}'; """)
@@ -187,8 +214,10 @@ class BibleDB:
             cur.execute(sql, (0,userid))
             self.con.commit()
         cur.close()
+        self.close()
 
     def increase_1_retry_count(self, userid):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT * FROM {self.user_table} WHERE UserID='{userid}'; """)
@@ -201,13 +230,16 @@ class BibleDB:
             cur.execute(sql, (cur_retry+1,userid))
             self.con.commit()
         cur.close()
+        self.close()
 
     def check_selection_exist(self, userid:str, storyid:int):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT * FROM {self.selection_table} WHERE UserID='{userid}' AND CurStoryID={storyid}; """)
         records = cur.fetchall()
         cur.close()
+        self.close()
         return len(records) > 0
 
     def get_selection_value_by_userid_and_storyid(self, userid:str, storyid:int):
@@ -217,11 +249,13 @@ class BibleDB:
         :param str storyid: User ID
         :return str: current selection value, return None if not found
         """
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT CurrentValue FROM {self.selection_table} WHERE UserID='{userid}' AND CurStoryID={storyid}; """)
         records = cur.fetchall()
         cur.close()
+        self.close()
         if len(records) > 0:
             return records[0][0]
         else:
@@ -229,6 +263,7 @@ class BibleDB:
             return None
 
     def upsert_selection_value(self, userid:str, storyid:int, value:str):
+        self.connect()
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT CurrentValue FROM {self.selection_table} WHERE UserID='{userid}' AND CurStoryID={storyid};""")
@@ -244,6 +279,7 @@ class BibleDB:
             cur.execute(sql, (userid, storyid, value))
             self.con.commit()
         cur.close()
+        self.close()
 
 
 def test_db():
@@ -255,7 +291,6 @@ def test_db():
     mydb.close()
 
 db = BibleDB()
-db.connect()
 try:
     # db.drop_table()
     pass
