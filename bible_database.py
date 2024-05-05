@@ -23,7 +23,7 @@ class BibleDB:
         self.connect()
         cur = self.con.cursor()
         cur.execute(
-            f"""CREATE TABLE IF NOT EXISTS {self.user_table} (UserID VARCHAR(255), CurStoryID int, Finished int, LoginCount int, RetryCount int, ConfirmEnd int);""")
+            f"""CREATE TABLE IF NOT EXISTS {self.user_table} (UserID VARCHAR(255), CurStoryID int, Finished int, LoginCount int, RetryCount int);""")
         self.con.commit()
         cur.close()
         print(f'{self.user_table} table created')
@@ -100,9 +100,9 @@ class BibleDB:
         f"""SELECT * FROM {self.user_table} WHERE UserID='{userid}'; """)
         users = cur.fetchall()
         if len(users) == 0:
-            sql = f''' INSERT INTO {self.user_table} (UserID,CurStoryID,Finished,LoginCount,RetryCount,ConfirmEnd)
-              VALUES(%s,%s,%s,%s,%s,%s) '''
-            cur.execute(sql, (userid, 0, 0, 1, 0, 0))
+            sql = f''' INSERT INTO {self.user_table} (UserID,CurStoryID,Finished,LoginCount,RetryCount)
+              VALUES(%s,%s,%s,%s,%s) '''
+            cur.execute(sql, (userid, 0, 0, 1, 0))
             self.con.commit()
             cur.close()
             self.close()
@@ -268,25 +268,6 @@ class BibleDB:
         cur = self.con.cursor()
         cur.execute(
         f"""SELECT CurrentValue FROM {self.selection_table} WHERE UserID='{userid}' AND CurStoryID={storyid};""")
-        records = cur.fetchall()
-        if len(records) > 0:
-            sql = f''' UPDATE {self.selection_table}
-              SET CurrentValue = %s
-              WHERE UserID = %s AND CurStoryID = %s'''
-            cur.execute(sql, (value,userid,storyid))
-            self.con.commit()
-        else:
-            sql = f''' INSERT INTO {self.selection_table} (UserID,CurStoryID,CurrentValue) VALUES(%s,%s,%s);'''
-            cur.execute(sql, (userid, storyid, value))
-            self.con.commit()
-        cur.close()
-        self.close()
-    
-    def check_received_ending_gift(self, userid:str):
-        self.connect()
-        cur = self.con.cursor()
-        cur.execute(
-        f"""SELECT ConfirmEnd FROM {self.user_table} WHERE UserID='{userid}' AND ConfirmEnd={storyid};""")
         records = cur.fetchall()
         if len(records) > 0:
             sql = f''' UPDATE {self.selection_table}
