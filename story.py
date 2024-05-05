@@ -1046,7 +1046,7 @@ class Ending(Story):
                     )
         )
         ]
-        return main_msg + picture
+        return picture + main_msg 
 
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
