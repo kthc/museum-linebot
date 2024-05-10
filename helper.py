@@ -64,10 +64,13 @@ def help(event, key=None):
         profile=line_bot_api.get_profile(user_id)
         user_name=profile.display_name
         s_mang = Story_Manager(user_name, user_id=user_id)
+        db.connect()
         db.delete_user(user_id)
         db.add_new_user(user_id)
         s_mang.show_welcome_story(event)
         help_done = True
+        db.close()
+        
     elif key == "-stage":
         print(f"{key} help function")
         user_id=event.source.user_id

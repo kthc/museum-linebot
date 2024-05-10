@@ -38,7 +38,6 @@ class BibleDB:
                 PRIMARY KEY (UserID, CurStoryID));""")
         self.con.commit()
         cur.close()
-        
         print(f'{self.selection_table} table created')
     
     def drop_table(self):
