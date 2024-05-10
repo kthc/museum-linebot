@@ -1035,7 +1035,7 @@ class Ending(Story):
         picture = [ImageSendMessage(original_content_url=f"{APP_URL}/static/img/SuccessLogo.jpg",
                                     preview_image_url=f"{APP_URL}/static/img/SuccessLogo.jpg")]
         main_msg = [TextSendMessage(
-            text='''恭喜破關!! 請出示以上圖示至愛羊全人關懷協會攤位兌換小點心!!!''',
+            text='''恭喜破關!! 請依以上指示至攤位兌換''',
             quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
