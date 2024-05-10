@@ -54,16 +54,20 @@ def follow(event):
     s_mang = Story_Manager(user_name, user_id)
     print(f"user_id: {user_id}")
     print(f"user_name: {user_name}")
+    db.connect()
     if not db.check_user_exist(user_id):
         db.add_new_user(user_id)
         s_mang.show_welcome_story(event)
+    db.close()
                 
 @handler.add(UnfollowEvent)
 def unfollow(event):
     print(f"UnfollowEvent: {event}")
     user_id=event.source.user_id
     print(f"user_id: {user_id}")
+    db.connect()
     db.delete_user(user_id)
+    db.close()
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -92,6 +96,7 @@ def handle_postback_event(event):
     msg = event.postback.data
     print(f"user_id: {user_id}, user_name: {user_name}, postback_input: {msg}")
     bypass = ['$Q3_Bypass', '$Q5_Bypass']
+    db.connect()
     if msg in bypass:
         pass
     elif msg == '$Q6_reset':
@@ -99,6 +104,7 @@ def handle_postback_event(event):
         called_helper = help(event, key='-force-prev')
     else:
         check_if_can_go_next_story(event, msg)
+    db.close()
 
 
 '''
@@ -110,6 +116,7 @@ def check_if_can_go_next_story(event, ans):
     profile=line_bot_api.get_profile(user_id)
     user_name=profile.display_name
     s_mang = Story_Manager(user_name, user_id)
+    db.connect()
     if not db.check_user_exist(user_id):
         db.add_new_user(user_id)
         s_mang.show_welcome_story(event)
@@ -118,6 +125,7 @@ def check_if_can_go_next_story(event, ans):
         cur_retry = db.get_retry_count_by_userid(user_id)
         end = s_mang.is_end_story(story_id)
         if end:
+            db.close()
             return
         ok = s_mang.check_answer(event, story_id, ans, retry_count=cur_retry + 1 ) # add one because it start from 0, so the first trial will be 0+1 = 1 attempt
         if ok and not end:
@@ -126,6 +134,7 @@ def check_if_can_go_next_story(event, ans):
             db.clear_retry_count(user_id)
         elif not ok:
             db.increase_1_retry_count(user_id)
+    db.close()
 
 if __name__ == '__main__':
     '''

@@ -116,6 +116,7 @@ def create_app():
         profile=line_bot_api.get_profile(user_id)
         user_name=profile.display_name
         s_mang = Story_Manager(user_name, user_id)
+        db.connect()
         if not db.check_user_exist(user_id):
             db.add_new_user(user_id)
             s_mang.show_welcome_story(event)
@@ -130,6 +131,7 @@ def create_app():
                 db.clear_retry_count(user_id)
             elif not ok:
                 db.increase_1_retry_count(user_id)
+        db.close()
     return app
 
 if __name__ == '__main__':

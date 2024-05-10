@@ -74,6 +74,7 @@ def help(event, key=None):
         profile=line_bot_api.get_profile(user_id)
         user_name=profile.display_name
         s_mang = Story_Manager(user_name, user_id=user_id)
+        db.connect()
         story_id = db.get_storyid_by_userid(user_id)
         story = s_mang.get_story(story_id)
         if story:
@@ -87,12 +88,15 @@ def help(event, key=None):
                     messages=[TextSendMessage(text=f"找不到你的關卡!?", sender=Sender(name='古亭智能小編', icon_url=f"{APP_URL}/static/img/admin.png"))]
                     )
         help_done = True
+        db.close()
+
     elif key == "-force-next" or key.lower() == "skip":
         print(f"{key} help function")
         user_id=event.source.user_id
         profile=line_bot_api.get_profile(user_id)
         user_name=profile.display_name
         s_mang = Story_Manager(user_name, user_id=user_id)
+        db.connect()
         story_id = db.get_storyid_by_userid(user_id)
         cur_retry = db.get_retry_count_by_userid(user_id)
         end = s_mang.is_end_story(story_id)
@@ -109,12 +113,15 @@ def help(event, key=None):
                     messages=[TextSendMessage(text=f"已經沒有下一關囉!", sender=Sender(name='古亭智能小編', icon_url=f"{APP_URL}/static/img/admin.png"))]
                     )
         help_done = True
+        db.close()
+
     elif key == "-force-prev" or key == "--p":
         print(f"{key} help function")
         user_id=event.source.user_id
         profile=line_bot_api.get_profile(user_id)
         user_name=profile.display_name
         s_mang = Story_Manager(user_name, user_id=user_id)
+        db.connect()
         story_id = db.get_storyid_by_userid(user_id)
         last_story = s_mang.last_story(story_id)
         if last_story:
@@ -126,6 +133,8 @@ def help(event, key=None):
                     messages=[TextSendMessage(text=f"已經沒有上一關囉!", sender=Sender(name='古亭智能小編', icon_url=f"{APP_URL}/static/img/admin.png"))]
                     )
         help_done = True
+        db.close()
+        
     elif key == "-test-img":
         print(f"{key} help function")
         line_bot_api.reply_message(
