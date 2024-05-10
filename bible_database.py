@@ -42,13 +42,12 @@ class BibleDB:
     
     def drop_table(self):
         tables = [self.user_table, self.selection_table]
+        cur = self.con.cursor()
         for table in tables:
-            cur = self.con.cursor()
             cur.execute(f"DROP TABLE {table}")
             self.con.commit()
-            cur.close()
             print(f'Dropped {table} Table!')
-        
+        cur.close()
     
     def execute(self, sql):
         cur = self.con.cursor()
@@ -200,7 +199,6 @@ class BibleDB:
         cur.execute(
         f"""SELECT * FROM {self.user_table} WHERE UserID='{userid}'; """)
         users = cur.fetchall()
-        cur.close()
         if len(users) > 0:
             cur_retry = self.get_retry_count_by_userid(userid)
             sql = f''' UPDATE {self.user_table}
@@ -208,6 +206,7 @@ class BibleDB:
               WHERE UserID = %s'''
             cur.execute(sql, (cur_retry+1,userid))
             self.con.commit()
+        cur.close()
 
     def check_selection_exist(self, userid:str, storyid:int):
         cur = self.con.cursor()
