@@ -326,7 +326,7 @@ class S2(Story):
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ["(映入眼廉是垂掛一組的別緻透明玻璃球) 小城你數數有幾顆？"]
+        self.main_messages = ["(映入眼廉是垂掛一組的別緻透明玻璃球)", "小城你數數有幾顆？"]
         self.ans = '15'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -366,7 +366,9 @@ class S3(Story):
     def get_main_message(self):
         return [
             TextSendMessage(
-                text="哇，這有馬槽聖嬰的小造景耶，讓我想起了小時候在附近教會安親班的點滴，小南你猜這個節日是對應上面球裡的什麼哩？"),
+                text="哇，這有馬槽聖嬰的小造景耶，讓我想起了小時候在附近教會安親班的點點滴滴"),
+            TextSendMessage(
+                text="小南你猜這個節日是對應上面球裡的什麼哩？"),
             TemplateSendMessage(
                 alt_text='馬槽聖嬰造景',
                 template=ButtonsTemplate(
@@ -415,7 +417,7 @@ class S4(Story):
         self.pre_messages = []
         self.post_messages = []
         self.main_messages = [
-            "誒，旁邊的這個是什麼啊？（看向旁邊）原來是計時工具啊，小城你從小學琴，哪種是你最熟悉的計時工具？"]
+            "誒，旁邊的這個是什麼啊？（看向旁邊）原來是計時工具啊", "小城你從小學琴，哪種是你最熟悉的計時工具？"]
         self.ans = '節拍器'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -446,13 +448,14 @@ class S5(Story):
         self.main_messages = []
         self.ans = '2'
         self.reply_messages_correct = [
-            "Wow!! 這個親子空間寓教於樂又設計用心超棒的，下次我們再來玩。(步行上樓，經過了記憶中熟悉的老牌咖啡廳，改裝後的它更顯恬靜怡然的氛圍)"]
+            "Wow!! 這個親子空間寓教於樂又設計用心超棒的，下次我們再來玩。", "(步行上樓，經過了記憶中熟悉的老牌咖啡廳，改裝後的它更顯恬靜怡然的氛圍)"]
         self.reply_messages_wrong = [
             '''好像不太對!''']
 
     def get_main_message(self):
         return [
-            TextSendMessage(text="小城小南，快看那邊的兒童彩繪圖好可愛呀，小南快來數數裡面有幾隻妳最愛的貓？"),
+            TextSendMessage(text="小城小南，快看那邊的兒童彩繪圖好可愛呀"),
+            TextSendMessage(text="小南快來數數裡面有幾隻妳最愛的貓？"),
             TemplateSendMessage(
                 alt_text='兒童彩繪',
                 template=ButtonsTemplate(
@@ -576,7 +579,7 @@ class S8(Story):
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ["原來史博館在1960年代早期的大廳上方有好細緻的龍鳳天花板，小南你看得出內圈是哪四個字嗎？"]
+        self.main_messages = ["原來史博館在1960年代早期的大廳上方有好細緻的龍鳳天花板","小南你看得出內圈是哪四個字嗎？"]
         self.ans = '吉祥如意'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -586,7 +589,7 @@ class S8(Story):
         picture = [ImageSendMessage(original_content_url=f"{APP_URL}/static/img/S8.png",
                                     preview_image_url=f"{APP_URL}/static/img/S8.png")]
         main_msg = [TextSendMessage(text=text) for text in self.main_messages]
-        return picture + main_msg
+        return main_msg + picture 
 
     def check_ans(self, ans, force_correct=False, retry_count=0):
         '''return (True, Messages:list), Message is empty list if ans is correct, otherwise need to throw error message to reply to linbot'''
@@ -611,7 +614,7 @@ class S9(Story):
         self.pre_messages = []
         self.post_messages = []
         self.main_messages = [
-            "史博館在整個日治時期，外觀始終以中央兩層樓為主，這日式木造建物的建材全採用哪裡出產的什麼木材？", "答案五個字，小城小南回憶一下，爸爸去年剛帶你們暑假去玩過也有見到唷。"]
+            "史博館在整個日治時期，外觀始終以中央兩層樓為主", "這日式木造建物的建材全採用哪裡出產的什麼木材？", "答案五個字，小城小南回憶一下，爸爸去年剛帶你們暑假去玩過也有見到唷。"]
         self.ans = '阿里山檜木'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -766,7 +769,9 @@ class S13(Story):
     def get_main_message(self):
         return [
             TextSendMessage(
-                text="小城小南，室內逛久了，我們出去館外透透氣吧，你們知道史博館外面有一個涼亭就是為了紀念首任館長包遵彭先生而命名的嗎，猜猜看它叫什麼名字呢？"),
+                text="小城小南，室內逛久了，我們出去館外透透氣吧!"),
+            TextSendMessage(
+                text="你們知道史博館外面有一個涼亭就是為了紀念首任館長包遵彭先生而命名的嗎，猜猜看它叫什麼名字呢？"),
             TemplateSendMessage(
                 alt_text='涼亭命名由來',
                 template=ButtonsTemplate(
@@ -915,7 +920,7 @@ class S16(Story):
         self.pre_messages = []
         self.post_messages = []
         self.main_messages = [
-            "小城小南，你們知道這個分館的圓頂建築是仿北京祈年殿的哪個建物所設計的嗎？(建議可問館員或是Google大師)"]
+            "小城小南，你們知道這個分館的圓頂建築是仿北京祈年殿的哪個建物所設計的嗎？","(建議可問館員或是Google大師)"]
         self.ans = '天壇'
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
@@ -997,7 +1002,7 @@ class S18(Story):
         self.story_name = ''
         self.pre_messages = []
         self.post_messages = []
-        self.main_messages = ["我記得戶外空間的最右側有一個特殊造型的拱門，你們看得出是什麼水果嗎？"]
+        self.main_messages = ["我記得戶外空間的最右側有一個特殊造型的拱門","你們看得出是什麼水果嗎？"]
         self.ans = '蘋果'
         self.reply_messages_correct = [
             '''太棒了，真是一場充實有趣的知性之旅，一邊回想兒時點滴又一邊體會著整修後的新意，頗有穿越時空的新舊融合感呀。時間還早，我們一起去逛逛外面的市集吧''']
@@ -1035,7 +1040,7 @@ class Ending(Story):
         picture = [ImageSendMessage(original_content_url=f"{APP_URL}/static/img/SuccessLogo.jpg",
                                     preview_image_url=f"{APP_URL}/static/img/SuccessLogo.jpg")]
         main_msg = [TextSendMessage(
-            text='''恭喜破關!! 請依以上指示至攤位兌換''',
+            text='''恭喜破關!! 請依以上指示至攤位兌換!''',
             quick_reply=QuickReply(
                     items=[
                         QuickReplyButton(
