@@ -282,7 +282,7 @@ class S1(Story):
         self.ans = ''
         self.reply_messages_correct = []
         self.reply_messages_wrong = [
-            '''請往史博館B1兒童創意空間''']
+            '''請往史博館B1兒童創意空間''', '''哇!原來創意空間還有開放時間的限制呢~如果不巧遇上清場，只好先到外面攤位逛逛囉!!''']
 
     def get_main_message(self):
         return [
@@ -310,9 +310,9 @@ class S1(Story):
         print(f"ans: {ans}")
         if force_correct:
             # force correct answer
-            return True, []
+            return True, [TextSendMessage(text='''哇!原來創意空間還有開放時間的限制呢~如果不巧遇上清場，只好先到外面攤位逛逛囉!!''')]
         if ans == '找到了，準備開始!!':
-            return True, []
+            return True, [TextSendMessage(text='''哇!原來創意空間還有開放時間的限制呢~如果不巧遇上清場，只好先到外面攤位逛逛囉!!''')]
         elif ans == '我迷路了，請給提示':
             return True, [TextSendMessage(text=msg) for msg in self.reply_messages_wrong]
         return False, []
